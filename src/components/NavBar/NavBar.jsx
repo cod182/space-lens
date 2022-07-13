@@ -22,21 +22,19 @@ const NavBar = () => {
   return (
     <>
       {isMobile ? (
-        <div>
-          <AppBar className={classes.appBar}>
-            <Toolbar className={classes.mobileNavContainer}>
-              <IconButton
-                color="inherit"
-                edge="start"
-                style={{ outline: 'none' }}
-                onClick={() => setMobileOpen(true)}
-              >
-                <Menu />
-              </IconButton>
-              <SearchBar />
-            </Toolbar>
-          </AppBar>
-        </div>
+        <AppBar className={classes.appBar}>
+          <Toolbar className={classes.mobileNavContainer}>
+            <IconButton
+              color="inherit"
+              edge="start"
+              style={{ outline: 'none' }}
+              onClick={() => setMobileOpen(true)}
+            >
+              <Menu />
+            </IconButton>
+            <SearchBar />
+          </Toolbar>
+        </AppBar>
       ) : (
         ''
       )}

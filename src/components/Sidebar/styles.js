@@ -6,6 +6,7 @@ export default makeStyles((theme) => ({
     justifyContent: 'center',
     flexDirection: 'column',
     width: '240px',
+    position: 'relative',
     backgroundColor: '#aeaeae !important',
     [theme.breakpoints.down('sm')]: {
       width: '100vw',
