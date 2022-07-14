@@ -12,6 +12,6 @@ export default makeStyles(() => ({
     flexDirection: 'row',
   },
   greyBackground: {
-    backgroundColor: '#aeaeae !important',
+    backgroundColor: '#e2e2e2 !important',
   }
 }));

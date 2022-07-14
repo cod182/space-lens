@@ -6,8 +6,6 @@ import {
   ListItemText,
   ListSubheader,
   ListItemIcon,
-  Box,
-  CircularProgress,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ElectricCarIcon from '@mui/icons-material/ElectricCar';

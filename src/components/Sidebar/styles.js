@@ -7,7 +7,6 @@ export default makeStyles((theme) => ({
     flexDirection: 'column',
     width: '240px',
     position: 'relative',
-    backgroundColor: '#aeaeae !important',
     [theme.breakpoints.down('sm')]: {
       width: '100vw',
     },
@@ -18,7 +17,6 @@ export default makeStyles((theme) => ({
   logo: {
     width: 'fit-content',
     height: '200px',
-    backgroundColor: 'inherit !important',
   },
   searchBarContainer: {
     margin: '20px 0',
@@ -29,14 +27,13 @@ export default makeStyles((theme) => ({
   },
   sidebarCategories: {
     alignItems: 'start',
-    backgroundColor: 'inherit !important',
     '& a': {
-      color: 'white !important',
+      color: 'black !important',
       textDecoration: 'none',
     },
     '& span': {
       fontWeight: 'bold',
-      fontSize: 'x-large',
+      fontSize: 'large',
     }
   },
   sidebarSubheader: {

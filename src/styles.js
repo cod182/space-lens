@@ -3,9 +3,9 @@ import { makeStyles } from '@mui/styles';
 export default makeStyles((theme) => ({
   root: {
     margin: '0 !important',
-    height: '100vh',
+    height: '100%',
     width: '100vw',
-    backgroundColor: '#464242'
+
   },
   toolbar: {
     height: '90px',
