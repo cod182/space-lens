@@ -8,6 +8,7 @@ import {
   ListItemIcon,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+
 import ElectricCarIcon from '@mui/icons-material/ElectricCar';
 import PublicIcon from '@mui/icons-material/Public';
 
@@ -16,25 +17,26 @@ import logo from '../../assets/images/logo.png';
 import { SearchBar } from '../index';
 
 const rovers = [
-  { key: 1, name: 'Rover 1', value: 'rover1' },
-  { key: 2, name: 'Rover 2', value: 'rover2' },
-  { key: 3, name: 'Rover 3', value: 'rover3' },
+  { name: 'Curiosity', value: 'curiosity' },
+  { name: 'Opportunity', value: 'opportunity' },
+  { name: 'Spirit', value: 'spirit' },
 ];
 
 const planets = [
-  { key: 1, name: 'Mercuery', value: 'mercuery' },
-  { key: 2, name: 'Venus', value: 'venus' },
-  { key: 3, name: 'Eath', value: 'earth' },
-  { key: 4, name: 'Mars', value: 'mars' },
-  { key: 5, name: 'Jupiter', value: 'jupiter' },
-  { key: 6, name: 'Saturn', value: 'saturn' },
-  { key: 7, name: 'Uranus', value: 'uranus' },
-  { key: 8, name: 'Neptune', value: 'neptune' },
-  { key: 9, name: 'Pluto', value: 'pluto' },
+  { name: 'Mercuery', value: 'mercuery' },
+  { name: 'Venus', value: 'venus' },
+  { name: 'Eath', value: 'earth' },
+  { name: 'Mars', value: 'mars' },
+  { name: 'Jupiter', value: 'jupiter' },
+  { name: 'Saturn', value: 'saturn' },
+  { name: 'Uranus', value: 'uranus' },
+  { name: 'Neptune', value: 'neptune' },
+  { name: 'Pluto', value: 'pluto' },
 ];
 
 const Sidebar = () => {
   let classes = useStyles();
+
   return (
     <div className={classes.sidebarContainer}>
       <Link to="/" className={classes.logoContainer}>
@@ -47,11 +49,11 @@ const Sidebar = () => {
       <Divider />
       <List className={classes.sidebarCategories}>
         <ListSubheader className={classes.sidebarSubheader}>
-          Rovers
+          <Link to="/rovers">Rovers</Link>
         </ListSubheader>
-        {rovers.map(({ key, name, value }) => (
-          <Link key={key} className={classes.links} to="/">
-            <ListItem button>
+        {rovers.map(({ name, value }) => (
+          <Link key={value} className={classes.links} to={`/rovers/${value}`}>
+            <ListItem>
               <ListItemIcon>
                 <ElectricCarIcon className={classes.sidebarIcon} />
               </ListItemIcon>
@@ -65,8 +67,8 @@ const Sidebar = () => {
         <ListSubheader className={classes.sidebarSubheader}>
           Planets
         </ListSubheader>
-        {planets.map(({ key, name, value }) => (
-          <Link key={key} className={classes.links} to="/">
+        {planets.map(({ name, value }) => (
+          <Link key={value} className={classes.links} to="/">
             <ListItem button>
               <ListItemIcon>
                 <PublicIcon className={classes.sidebarIcon} />

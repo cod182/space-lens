@@ -2,15 +2,13 @@ import React from 'react';
 import { Typography, Box } from '@mui/material';
 
 import useStyles from './styles';
-import image1 from '../../assets/images/logo.png';
-import { useGetAPODQuery } from '../../services/NASA';
+import { useGetAPODQuery, useGetImagesQuery } from '../../services/NASA';
 import { LoadingSpinner, ImageContainer } from '../../components/index';
 
 const Home = () => {
   let classes = useStyles();
 
   const { data, error, isFetching } = useGetAPODQuery({});
-  console.log(data);
 
   if (isFetching) {
     return (
@@ -38,9 +36,8 @@ const Home = () => {
       <Box className={classes.homeImageInfoContainer}>
         <Typography variant="h5">{data?.title}</Typography>
         <Typography variant="body3">
-          {data?.date.split('-').reverse().join('/')}
+          {data?.date?.split('-').reverse().join('/')}
         </Typography>
-
         <Typography variant="body2">{data?.explanation}</Typography>
       </Box>
     </div>

@@ -5,6 +5,8 @@ export default makeStyles((theme) => ({
     width: '100%',
     objectFit: 'cover',
     borderRadius: '10px',
+  },
+  cursorPointer: {
     '&:hover': {
       cursor: 'pointer',
     }
@@ -12,10 +14,10 @@ export default makeStyles((theme) => ({
   model: {
     position: 'absolute',
     top: '50%',
-    left: '60%',
+    left: '50%',
     transform: 'translate(-50%, -50%)',
     maxWidth: '60vw',
-    maxHeight: '60vh',
+    maxHeight: '80vh',
     backgroundColor: 'white',
     border: '3px solid #000',
     borderRadius: '10px',
@@ -26,7 +28,6 @@ export default makeStyles((theme) => ({
     overflow: 'scroll',
     textAlign: 'center',
     [theme.breakpoints.down('md')]: {
-      left: '50%',
       width: '70vw',
     }
   },
@@ -35,6 +36,10 @@ export default makeStyles((theme) => ({
     margin: 'auto',
     maxHeight: 'auto',
     borderRadius: '10px'
+  },
+  title: {
+    color: 'white',
+    textAlign: 'center',
   }
 }
 ));

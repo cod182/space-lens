@@ -6,33 +6,21 @@ export const nasaApi = createApi({
   reducerPath: 'nasaApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.nasa.gov/' }),
   endpoints: (builder) => ({
+
     //* Get Astronomy Photo Of the Day
     getAPOD: builder.query({
       query: () => `planetary/apod?api_key=${nasaApiKey}`,
     }),
 
-    // //* Get Movies by [Type]
-    // getMovies: builder.query({
-    //   query: ({ genreIdOrCategoryName, page, searchQuery }) => {
-    //     //* Get Movies by Search
-    //     if (searchQuery) {
-    //       return `/search/movie?query=${searchQuery}&page=${page}&api_key=${nasaApiKey}`;
-    //     }
-
-    //     //* Get Movies by Category
-    //     if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'string') {
-    //       return `movie/${genreIdOrCategoryName}?page=${page}&api_key=${nasaApiKey}`;
-    //     }
-
-    //     //* Get Movies by Genre
-    //     if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'number') {
-    //       return `discover/movie?with_genres=${genreIdOrCategoryName}&page=${page}&api_key=${nasaApiKey}`;
-    //     }
-
-    //     //* Get Popular Movies
-    //     return `movie/popular?page=${page}&api_key=${nasaApiKey}`;
-    //   },
-    // }),
+    // //* Get Photos by [Type]
+    getImages: builder.query({
+      query: ({ rover, sol, camera }) => {
+        //* Get images by Rover
+        if (rover === 'opportunity' || "curiosity" || "spirit") {
+          return `mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}&camera=${camera}&api_key=${nasaApiKey}`;
+        }
+      },
+    }),
 
     // //* Get Movie
     // getMovie: builder.query({
@@ -59,5 +47,5 @@ export const nasaApi = createApi({
 });
 
 export const {
-  useGetAPODQuery,
+  useGetAPODQuery, useGetImagesQuery
 } = nasaApi;
