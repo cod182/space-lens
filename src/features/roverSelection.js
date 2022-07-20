@@ -1,20 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const roverSelection = createSlice({
-  name: 'roverSelection',
+export const availableCameras = createSlice({
+  name: 'availableCameras',
   initialState: {
-    rover: '',
-    page: 1,
-    sol: '',
+    cameras: [],
   },
   reducers: {
-    selectroverSelection: (state, action) => {
-      state.rover = action.payload;
-      state.sol = sol;
+    selectCameras: (state, action) => {
+      state.cameras = action.payload;
     },
   },
 });
 
-export const { selectroverSelection, searchMovie } = roverSelection.actions;
+export const { selectCameras } = availableCameras.actions;
 
-export default roverSelection.reducer;
+export default availableCameras.reducer;

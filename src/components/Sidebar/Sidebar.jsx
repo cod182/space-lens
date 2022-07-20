@@ -20,6 +20,7 @@ const rovers = [
   { name: 'Curiosity', value: 'curiosity' },
   { name: 'Opportunity', value: 'opportunity' },
   { name: 'Spirit', value: 'spirit' },
+  { name: 'Perseverance', value: 'perseverance' },
 ];
 
 const planets = [

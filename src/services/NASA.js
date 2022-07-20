@@ -12,12 +12,19 @@ export const nasaApi = createApi({
       query: () => `planetary/apod?api_key=${nasaApiKey}`,
     }),
 
+    getRover: builder.query({
+      query: ({ rover }) => {
+        return `mars-photos/api/v1/rovers/${rover}?api_key=${nasaApiKey}`;
+
+      }
+    }),
+
     // //* Get Photos by [Type]
     getImages: builder.query({
-      query: ({ rover, sol, camera }) => {
+      query: ({ rover, earthDate }) => {
         //* Get images by Rover
         if (rover === 'opportunity' || "curiosity" || "spirit") {
-          return `mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}&camera=${camera}&api_key=${nasaApiKey}`;
+          return `mars-photos/api/v1/rovers/${rover}/photos?earth_date=${earthDate}&api_key=${nasaApiKey}`;
         }
       },
     }),
@@ -47,5 +54,5 @@ export const nasaApi = createApi({
 });
 
 export const {
-  useGetAPODQuery, useGetImagesQuery
+  useGetAPODQuery, useGetImagesQuery, useGetRoverQuery,
 } = nasaApi;
