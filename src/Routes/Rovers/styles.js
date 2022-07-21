@@ -33,18 +33,26 @@ export default makeStyles((theme) => ({
       backgroundColor: 'white',
       color: 'black',
       "& $roverInfoContainer": {
-        display: 'block'
+        transform: 'translateY(7%)',
+        transition: 'all 300ms ease-in-out',
+
       },
     },
   },
+
   roverInfoContainer: {
     position: 'absolute',
-    display: 'none',
     backgroundColor: '#ffffff8c',
     width: '100%',
     height: '88%',
-    bottom: '0',
+    transform: 'translateY(110%)',
+    transition: 'all 300ms ease-in-out',
   },
+
+  roverInfoInnerContainer: {
+    padding: '15px 15px',
+  },
+
   roverImage: {
     maxWidth: '100%',
     objectFit: 'cover',

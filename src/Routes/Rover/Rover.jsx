@@ -60,6 +60,7 @@ const Rover = () => {
               flexDirection: 'row',
               flexWrap: 'wrap',
             }}
+            className={classes.imagesGrid}
           >
             <Grid item md={12}>
               {/* Page Title */}
@@ -121,7 +122,7 @@ const Rover = () => {
               )
             )}
           </Grid>
-          <Grid item md={4}>
+          <Grid item md={4} className={classes.infoGrid}>
             <Grid item md={12} className={classes.FlexRowCenter}>
               {roverInfoFetching ? (
                 <Box sx={{ margin: 'auto' }}>

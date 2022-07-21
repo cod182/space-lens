@@ -35,7 +35,7 @@ const planets = [
   { name: 'Pluto', value: 'pluto' },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ setMobileOpen }) => {
   let classes = useStyles();
 
   return (
@@ -53,7 +53,12 @@ const Sidebar = () => {
           <Link to="/rovers">Rovers</Link>
         </ListSubheader>
         {rovers.map(({ name, value }) => (
-          <Link key={value} className={classes.links} to={`/rovers/${value}`}>
+          <Link
+            key={value}
+            className={classes.links}
+            to={`/rovers/${value}`}
+            onClick={() => setMobileOpen(false)}
+          >
             <ListItem>
               <ListItemIcon>
                 <ElectricCarIcon className={classes.sidebarIcon} />

@@ -37,23 +37,27 @@ const Rovers = () => {
                   <Typography variant="h5">{name}</Typography>
                 </Box>
                 <Box className={classes.roverInfoContainer}>
-                  <Typography variant="h6">Stats:</Typography>
-                  <Typography variant="body1">Status: {status}</Typography>
-                  <Typography variant="body1">
-                    Launch Date: {launch_date.split('-').reverse().join('/')}
-                  </Typography>
-                  <Typography variant="body1">
-                    Landing Date: {landing_date.split('-').reverse().join('/')}
-                  </Typography>
-                  <Typography variant="body1">
-                    Mission End Date: {max_date.split('-').reverse().join('/')}
-                  </Typography>
-                  <Typography variant="body1">
-                    No. of Cameras: {cameras.length}
-                  </Typography>
-                  <Typography variant="body1">
-                    Total Photos: {total_photos}
-                  </Typography>
+                  <Box>
+                    <Typography variant="h6">Stats:</Typography>
+                    <Typography variant="body1">Status: {status}</Typography>
+                    <Typography variant="body1">
+                      Launch Date: {launch_date.split('-').reverse().join('/')}
+                    </Typography>
+                    <Typography variant="body1">
+                      Landing Date:{' '}
+                      {landing_date.split('-').reverse().join('/')}
+                    </Typography>
+                    <Typography variant="body1">
+                      Mission End Date:{' '}
+                      {max_date.split('-').reverse().join('/')}
+                    </Typography>
+                    <Typography variant="body1">
+                      No. of Cameras: {cameras.length}
+                    </Typography>
+                    <Typography variant="body1">
+                      Total Photos: {total_photos}
+                    </Typography>
+                  </Box>
                 </Box>
                 <Box sx={{ maxWidth: '100%', maxHeight: '100%' }}>
                   <img

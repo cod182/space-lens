@@ -6,6 +6,19 @@ export default makeStyles((theme) => ({
       backgroundColor: "black"
     }
   },
+  imagesGrid: {
+    order: '1',
+    justifyContent: 'space-evenly',
+    [theme.breakpoints.down('md')]: {
+      order: '2',
+    },
+  },
+  infoGrid: {
+    order: '2',
+    [theme.breakpoints.down('md')]: {
+      order: '1',
+    },
+  },
   pageTitle: {
     color: 'white',
     textAlign: 'center',
