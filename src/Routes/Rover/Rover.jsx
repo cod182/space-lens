@@ -6,12 +6,11 @@ import useStyles from './styles';
 
 import { LoadingSpinner, ImageContainer } from '../../components/index';
 import { useGetImagesQuery, useGetRoverQuery } from '../../services/NASA';
-import curiosity from '../../assets/images/curiosity.jpg';
+import roverImages from '../../assets/images';
 
 const Rover = () => {
   const { rover } = useParams();
   const [earthDate, setEarthDate] = useState('1979-01-01');
-  const [roverImg, setRoverImg] = useState();
 
   const classes = useStyles();
   const { data: roverInfo, isFetching: roverInfoFetching } = useGetRoverQuery({
@@ -30,26 +29,22 @@ const Rover = () => {
   useEffect(() => {
     if (rover === 'curiosity') {
       setEarthDate('2012-08-06');
-      setRoverImg(curiosity);
     }
     if (rover === 'opportunity') {
       setEarthDate('2004-01-26');
-      setRoverImg();
     }
     if (rover === 'spirit') {
       setEarthDate('2004-01-05');
-      setRoverImg();
     }
     if (rover === 'perseverance') {
       setEarthDate('2021-02-18');
-      setRoverImg();
     }
   }, [rover]);
 
   return (
     <>
       {isFetching ? (
-        <Modal aria-labelledby="Loading" open="open">
+        <Modal aria-labelledby="Loading" open={true}>
           <Box className={classes.loadingModal}>
             <LoadingSpinner />
           </Box>
@@ -183,7 +178,9 @@ const Rover = () => {
               sx={{ marginTop: '10px' }}
             >
               <Box>
-                <ImageContainer imgSrc={roverImg} />
+                <ImageContainer
+                  imgSrc={roverImages[roverInfo?.rover?.name.toLowerCase()]}
+                />
               </Box>
             </Grid>
             <Grid item md={12} sx={{ textAlign: 'center' }}>

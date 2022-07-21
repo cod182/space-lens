@@ -12,10 +12,18 @@ export const nasaApi = createApi({
       query: () => `planetary/apod?api_key=${nasaApiKey}`,
     }),
 
+    // Get all available rovers
+    getRovers: builder.query({
+      query: () => {
+        return `mars-photos/api/v1/rovers?api_key=${nasaApiKey}`;
+
+      }
+    }),
+
+    // Get specified rover info
     getRover: builder.query({
       query: ({ rover }) => {
         return `mars-photos/api/v1/rovers/${rover}?api_key=${nasaApiKey}`;
-
       }
     }),
 
@@ -28,31 +36,9 @@ export const nasaApi = createApi({
         }
       },
     }),
-
-    // //* Get Movie
-    // getMovie: builder.query({
-    //   query: (id) => `/movie/${id}?append_to_response=videos,credits&api_key=${nasaApiKey}`,
-    // }),
-
-    // //* Get User Specific Lists
-    // getList: builder.query({
-    //   query: ({ listName, accountId, sessionId, page }) => `/account/${accountId}/${listName}?api_key=${nasaApiKey}&session_id=${sessionId}&page=${page}`,
-    // }),
-
-    // getRecommendations: builder.query({
-    //   query: ({ movie_id, list }) => `/movie/${movie_id}/${list}?api_key=${nasaApiKey}`,
-    // }),
-
-    // getActorsDetails: builder.query({
-    //   query: (id) => `person/${id}?api_key=${nasaApiKey}`,
-    // }),
-
-    // getMoviesByActorId: builder.query({
-    //   query: ({ id, page }) => `/discover/movie?with_cast=${id}&page=${page}&api_key=${nasaApiKey}`,
-    // }),
   }),
 });
 
 export const {
-  useGetAPODQuery, useGetImagesQuery, useGetRoverQuery,
+  useGetAPODQuery, useGetImagesQuery, useGetRoverQuery, useGetRoversQuery
 } = nasaApi;
