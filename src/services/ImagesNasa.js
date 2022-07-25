@@ -6,9 +6,9 @@ export const imagesNasaApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://images-api.nasa.gov/' }),
   endpoints: (builder) => ({
 
-    //* Get Astronomy Photo Of the Day
+    //* Get images by search query
     getNasaImages: builder.query({
-      query: (query) => { return `search?q=${query}` },
+      query: ({ query, page }) => { return `search?q=${query}&media_type=image&page=${page}` },
     }),
   }),
 });
