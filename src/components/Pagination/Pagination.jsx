@@ -22,9 +22,31 @@ const Pagination = ({ currentPage, totalPages, setPage }) => {
 
   return (
     <div className={classes.container}>
-      <Button onClick={handlePrev} className={classes.button} variant="contained" color="primary" type="button">Prev</Button>
-      <Typography variant="h4" className={classes.pageNumber}>{currentPage}</Typography>
-      <Button onClick={handleNext} className={classes.button} variant="contained" color="primary" type="button">Next</Button>
+      {currentPage != 1 ? (
+        <Button
+          onClick={handlePrev}
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          type="button"
+        >
+          Prev
+        </Button>
+      ) : null}
+      <Typography variant="h4" className={classes.pageNumber}>
+        {currentPage}
+      </Typography>
+      {currentPage != totalPages ? (
+        <Button
+          onClick={handleNext}
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          type="button"
+        >
+          Next
+        </Button>
+      ) : null}
     </div>
   );
 };

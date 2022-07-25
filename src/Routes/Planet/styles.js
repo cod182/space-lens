@@ -6,6 +6,15 @@ export default makeStyles((theme) => ({
       backgroundColor: "black"
     }
   },
+  loadingModal: {
+    position: 'absolute',
+    top: '50%',
+    left: '60%',
+    transform: 'translate(-50%, -50%)',
+    [theme.breakpoints.down('md')]: {
+      left: '50%',
+    },
+  },
 }
 ));
 
