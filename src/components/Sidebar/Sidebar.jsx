@@ -24,7 +24,7 @@ const rovers = [
 ];
 
 const planets = [
-  { name: 'Mercuery', value: 'mercuery' },
+  { name: 'Mercury', value: 'mercury' },
   { name: 'Venus', value: 'venus' },
   { name: 'Eath', value: 'earth' },
   { name: 'Mars', value: 'mars' },
@@ -77,7 +77,7 @@ const Sidebar = ({ setMobileOpen }) => {
           <Link
             key={value}
             className={classes.links}
-            tto={`/planets/${value}`}
+            to={`/planets/${value}`}
             onClick={() => setMobileOpen(false)}
           >
             <ListItem button>

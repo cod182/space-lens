@@ -7,12 +7,12 @@ export const imagesNasaApi = createApi({
   endpoints: (builder) => ({
 
     //* Get Astronomy Photo Of the Day
-    getImages: builder.query({
+    getNasaImages: builder.query({
       query: (query) => { return `search?q=${query}` },
     }),
   }),
 });
 
 export const {
-  useGetImagesQuery
+  useGetNasaImagesQuery
 } = imagesNasaApi;
