@@ -23,8 +23,8 @@ export default makeStyles((theme) => ({
     margin: '20px 0 !important',
     backgroundColor: 'black',
     border: '1px solid white',
-    maxHeight: '300px !importnat',
-    maxWidth: '300px !important',
+    maxHeight: '400px !importnat',
+    maxWidth: '400px !important',
     borderRadius: '10px',
     overflow: 'hidden',
     position: 'relative',
@@ -39,7 +39,6 @@ export default makeStyles((theme) => ({
       },
     },
   },
-
   roverInfoContainer: {
     position: 'absolute',
     backgroundColor: '#ffffff8c',
@@ -49,9 +48,12 @@ export default makeStyles((theme) => ({
     transition: 'all 300ms ease-in-out',
   },
 
-  roverInfoInnerContainer: {
+  statsContainer: {
     padding: '15px 15px',
+    textTransform: 'capitalize',
   },
+  green: { color: '#21ff21' },
+  red: { color: 'red' },
 
   roverImage: {
     maxWidth: '100%',

@@ -74,7 +74,12 @@ const Sidebar = ({ setMobileOpen }) => {
           Planets
         </ListSubheader>
         {planets.map(({ name, value }) => (
-          <Link key={value} className={classes.links} to="/">
+          <Link
+            key={value}
+            className={classes.links}
+            tto={`/planets/${value}`}
+            onClick={() => setMobileOpen(false)}
+          >
             <ListItem button>
               <ListItemIcon>
                 <PublicIcon className={classes.sidebarIcon} />

@@ -21,8 +21,6 @@ const Rover = () => {
     earthDate,
   });
 
-  console.log(data);
-
   // Array to hold unique cameras
   let camerasPresent = [];
 
@@ -101,7 +99,7 @@ const Rover = () => {
                 <LoadingSpinner />
               </Grid>
             ) : (
-              data?.photos.map(({ img_src, camera }) =>
+              data?.photos.map(({ img_src, camera, id }) =>
                 // if a camera is already in the camerasPresent array, it is skipped
                 camerasPresent.includes(camera?.name) ? null : (
                   <Grid
@@ -114,6 +112,7 @@ const Rover = () => {
                       imgSrc={img_src}
                       imgTitle={camera?.full_name}
                       title={camera?.full_name}
+                      i={id}
                     />
                     {/* Pushes the camera into the camerasPresent array */}
                     {camerasPresent.push(camera?.name)}
@@ -181,6 +180,7 @@ const Rover = () => {
               <Box>
                 <ImageContainer
                   imgSrc={roverImages[roverInfo?.rover?.name.toLowerCase()]}
+                  i={roverInfo?.rover?.id}
                 />
               </Box>
             </Grid>
