@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, Grid, Modal } from '@mui/material';
+import { Box, Typography, Grid, Modal, Button } from '@mui/material';
 
 import useStyles from './styles';
 
@@ -8,36 +8,54 @@ import { LoadingSpinner, ImageContainer } from '../../components/index';
 import { useGetImagesQuery, useGetRoverQuery } from '../../services/NASA';
 import roverImages from '../../assets/images';
 
-const Rover = () => {
-  const { rover } = useParams();
-  const [earthDate, setEarthDate] = useState('1979-01-01');
+function incrementDate(earthDate) {
+  const date = new Date(earthDate);
+  const mili = date.setDate(date.getDate() + 1);
+  const dateObject = new Date(mili);
+  const humanDateFormat = dateObject
+    .toLocaleString()
+    .slice(0, 10)
+    .split('/')
+    .reverse()
+    .join('-');
+  return humanDateFormat;
+}
 
+function decrementDate(earthDate) {
+  const date = new Date(earthDate);
+  const mili = date.setDate(date.getDate() - 1);
+  const dateObject = new Date(mili);
+  const humanDateFormat = dateObject
+    .toLocaleString()
+    .slice(0, 10)
+    .split('/')
+    .reverse()
+    .join('-');
+  return humanDateFormat;
+}
+
+const Rover = () => {
   const classes = useStyles();
+
+  const { rover } = useParams();
+  const [earthDate, setEarthDate] = useState('2000-01-01');
+  console.log(earthDate);
+
   const { data: roverInfo, isFetching: roverInfoFetching } = useGetRoverQuery({
     rover,
   });
-  const { data, isFetching } = useGetImagesQuery({
-    rover,
-    earthDate,
-  });
+
+  useEffect(() => {
+    setEarthDate(roverInfo?.rover?.landing_date);
+  }, [roverInfo]);
 
   // Array to hold unique cameras
   let camerasPresent = [];
 
-  useEffect(() => {
-    if (rover === 'curiosity') {
-      setEarthDate('2012-08-06');
-    }
-    if (rover === 'opportunity') {
-      setEarthDate('2004-01-26');
-    }
-    if (rover === 'spirit') {
-      setEarthDate('2004-01-05');
-    }
-    if (rover === 'perseverance') {
-      setEarthDate('2021-02-18');
-    }
-  }, [rover]);
+  const { data, isFetching } = useGetImagesQuery({
+    rover,
+    earthDate,
+  });
 
   return (
     <>
@@ -80,14 +98,18 @@ const Rover = () => {
                     <Typography variant="h6" sx={{ color: 'white' }}>
                       Try another date
                     </Typography>
-                    <input
-                      type="date"
-                      value={earthDate}
-                      onChange={(e) => setEarthDate(e.target.value)}
-                      min={data?.photos[0]?.rover?.landing_date}
-                      max={new Date().toISOString().slice(0, 10)}
-                      className={classes.dateInput}
-                    />
+                    {roverInfo?.rover?.landing_date === earthDate ? (
+                      setEarthDate(incrementDate(earthDate))
+                    ) : (
+                      <input
+                        type="date"
+                        value={earthDate}
+                        onChange={(e) => setEarthDate(e.target.value)}
+                        min={data?.photos[0]?.rover?.landing_date}
+                        max={new Date().toISOString().slice(0, 10)}
+                        className={classes.dateInput}
+                      />
+                    )}
                   </Box>
                 </>
               )}
@@ -188,14 +210,34 @@ const Rover = () => {
               {isFetching ? (
                 <LoadingSpinner />
               ) : (
-                <input
-                  type="date"
-                  value={earthDate}
-                  onChange={(e) => setEarthDate(e.target.value)}
-                  min={data?.photos[0]?.rover?.landing_date}
-                  max={new Date().toISOString().slice(0, 10)}
-                  className={classes.dateInput}
-                />
+                <>
+                  <input
+                    type="date"
+                    value={earthDate}
+                    onChange={(e) => setEarthDate(e.target.value)}
+                    min={data?.photos[0]?.rover?.landing_date}
+                    max={new Date().toISOString().slice(0, 10)}
+                    className={classes.dateInput}
+                  />
+                  <Box>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      sx={{ margin: 'auto 5px' }}
+                      onClick={() => setEarthDate(decrementDate(earthDate))}
+                    >
+                      Previous Day
+                    </Button>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      sx={{ margin: 'auto 5px' }}
+                      onClick={() => setEarthDate(incrementDate(earthDate))}
+                    >
+                      Next Day
+                    </Button>
+                  </Box>
+                </>
               )}
             </Grid>
           </Grid>

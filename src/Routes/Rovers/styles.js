@@ -43,7 +43,7 @@ export default makeStyles((theme) => ({
     position: 'absolute',
     backgroundColor: '#ffffff8c',
     width: '100%',
-    height: '88%',
+    height: '94%',
     transform: 'translateY(110%)',
     transition: 'all 300ms ease-in-out',
   },
