@@ -8,23 +8,12 @@ export default makeStyles((theme) => ({
     paddingTop: '20px',
     paddingBottom: '20px',
   },
-  homeImageContainer: {
-    marginTop: '40px',
-    marginBottom: '20px',
-    maxHeight: '40%',
-    maxWidth: '40%',
-    borderRadius: '10px',
-    [theme.breakpoints.down('md')]: {
-      maxHeight: '100%',
-      maxWidth: '100%',
-    }
-  },
   homeImage: {
     width: '100%',
     objectFit: 'cover',
     borderRadius: '10px',
   },
-  homeImageInfoContainer: {
+  homeInfoContainer: {
     width: '70%',
     display: 'flex',
     flexDirection: 'column',
@@ -32,9 +21,9 @@ export default makeStyles((theme) => ({
     backgroundColor: 'gray',
     borderRadius: '10px',
     padding: '10px',
+    margin: '10px',
     '& p': {
-      marginTop: '20px',
-      marginBottom: '10px',
+      margin: '10px',
     },
     [theme.breakpoints.down('md')]: {
       width: 'auto'

@@ -3,7 +3,7 @@ import { Typography, Box } from '@mui/material';
 
 import useStyles from './styles';
 import { useGetAPODQuery, useGetImagesQuery } from '../../services/NASA';
-import { LoadingSpinner, ImageContainer } from '../../components/index';
+import { LoadingSpinner, FeaturedImage } from '../../components/index';
 
 const Home = () => {
   let classes = useStyles();
@@ -23,21 +23,13 @@ const Home = () => {
 
   return (
     <div className={classes.homeContainer}>
-      <Typography align="center" variant="h2">
-        NASA's Image of the day!
-      </Typography>
-      <div className={classes.homeImageContainer}>
-        <ImageContainer
-          imgSrc={data?.url}
-          imgTitle={data?.title}
-          hdImg={data?.hdurl}
-        />
-      </div>
-      <Box className={classes.homeImageInfoContainer}>
-        <Typography variant="h5">{data?.title}</Typography>
-        <Typography variant="body3">
-          {data?.date?.split('-').reverse().join('/')}
-        </Typography>
+      <FeaturedImage
+        imgSrc={data?.url}
+        imgDate={data?.date?.split('-').reverse().join('/')}
+        imgTitle={data?.title}
+        hdImg={data?.hdurl}
+      />
+      <Box className={classes.homeInfoContainer}>
         <Typography variant="body2">{data?.explanation}</Typography>
       </Box>
     </div>
