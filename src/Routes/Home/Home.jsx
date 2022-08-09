@@ -24,13 +24,13 @@ const Home = () => {
   return (
     <div className={classes.homeContainer}>
       <FeaturedImage
-        imgSrc={data?.url}
+        imgSrc={data.thumbnail_url ? data?.thumbnail_url : data?.url}
         imgDate={data?.date?.split('-').reverse().join('/')}
         imgTitle={data?.title}
-        hdImg={data?.hdurl}
+        hdImg={data.thumbnail_url ? data?.url : data?.hdurl}
       />
       <Box className={classes.homeInfoContainer}>
-        <Typography variant="body2">{data?.explanation}</Typography>
+        <Typography variant="body1">{data?.explanation}</Typography>
       </Box>
     </div>
   );

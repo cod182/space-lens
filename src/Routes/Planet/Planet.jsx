@@ -17,7 +17,6 @@ const Planet = () => {
   let query = 'planet ' + planet + ' images';
   const { data, isFetching, error } = useGetNasaImagesQuery({ query, page });
   const totalPages = Math.floor(data?.collection?.metadata?.total_hits / 100);
-  console.log(data);
 
   return isFetching ? (
     <Modal aria-labelledby="Loading" open={true}>

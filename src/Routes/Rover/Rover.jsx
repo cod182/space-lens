@@ -38,11 +38,15 @@ const Rover = () => {
   const classes = useStyles();
 
   const { rover } = useParams();
-  const [earthDate, setEarthDate] = useState('2000-01-01');
-  console.log(earthDate);
+  const [earthDate, setEarthDate] = useState('1979-01-01');
 
   const { data: roverInfo, isFetching: roverInfoFetching } = useGetRoverQuery({
     rover,
+  });
+
+  const { data, isFetching } = useGetImagesQuery({
+    rover,
+    earthDate,
   });
 
   useEffect(() => {
@@ -51,11 +55,6 @@ const Rover = () => {
 
   // Array to hold unique cameras
   let camerasPresent = [];
-
-  const { data, isFetching } = useGetImagesQuery({
-    rover,
-    earthDate,
-  });
 
   return (
     <>
@@ -155,7 +154,7 @@ const Rover = () => {
                     {roverInfo?.rover?.name}
                   </Typography>
                   <Typography className={classes.title} variant="body1">
-                    Status:{' '}
+                    Mission Status:{' '}
                     <span
                       className={
                         roverInfo?.rover?.status === 'active'
@@ -163,7 +162,8 @@ const Rover = () => {
                           : classes.red
                       }
                     >
-                      {roverInfo?.rover?.status}
+                      {roverInfo?.rover?.status.slice(0, 1).toUpperCase()}
+                      {roverInfo?.rover?.status.slice(1)}
                     </span>
                   </Typography>
                   <Typography className={classes.title} variant="body1">
@@ -226,7 +226,7 @@ const Rover = () => {
                       sx={{ margin: 'auto 5px' }}
                       onClick={() => setEarthDate(decrementDate(earthDate))}
                     >
-                      Previous Day
+                      Prev Day
                     </Button>
                     <Button
                       color="primary"

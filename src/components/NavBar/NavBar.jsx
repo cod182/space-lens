@@ -9,7 +9,7 @@ import {
 
 import { Menu } from '@mui/icons-material';
 
-import { Sidebar, SearchBar } from '../index';
+import { Sidebar } from '../index';
 
 import useStyles from './styles';
 
@@ -32,7 +32,6 @@ const NavBar = () => {
             >
               <Menu />
             </IconButton>
-            <SearchBar />
           </Toolbar>
         </AppBar>
       ) : (

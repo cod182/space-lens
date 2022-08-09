@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { NavBar } from './components/index';
-import { Home, Rovers, Rover, Planet } from './Routes/index';
+import { Home, Rovers, Rover, Planet, Attribution } from './Routes/index';
 
 import useStyles from './styles';
 
@@ -22,6 +22,7 @@ const App = () => {
           <Route path="/planets">
             <Route path=":planet" element={<Planet />} />
           </Route>
+          <Route path="/attribution" element={<Attribution />} />
         </Routes>
       </main>
     </div>

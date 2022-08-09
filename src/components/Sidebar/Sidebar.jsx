@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Divider,
   List,
@@ -6,15 +6,15 @@ import {
   ListItemText,
   ListSubheader,
   ListItemIcon,
+  Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import ElectricCarIcon from '@mui/icons-material/ElectricCar';
-import PublicIcon from '@mui/icons-material/Public';
+import roverIcon from '../../assets/images/rover.png';
 
 import useStyles from './styles';
 import logo from '../../assets/images/logo.png';
-import { SearchBar } from '../index';
+import planetImages from '../../assets/images';
 
 const rovers = [
   { name: 'Curiosity', value: 'curiosity' },
@@ -26,7 +26,7 @@ const rovers = [
 const planets = [
   { name: 'Mercury', value: 'mercury' },
   { name: 'Venus', value: 'venus' },
-  { name: 'Eath', value: 'earth' },
+  { name: 'Earth', value: 'earth' },
   { name: 'Mars', value: 'mars' },
   { name: 'Jupiter', value: 'jupiter' },
   { name: 'Saturn', value: 'saturn' },
@@ -40,17 +40,26 @@ const Sidebar = ({ setMobileOpen }) => {
 
   return (
     <div className={classes.sidebarContainer}>
-      <Link to="/" className={classes.logoContainer}>
+      <Link
+        to="/"
+        className={classes.logoContainer}
+        onClick={() => setMobileOpen(false)}
+      >
         <img className={classes.logo} src={logo} alt="Space Lens Logo" />
       </Link>
       <Divider />
-      <div className={classes.searchBarContainer}>
-        <SearchBar />
-      </div>
-      <Divider />
       <List className={classes.sidebarCategories}>
-        <ListSubheader className={classes.sidebarSubheader}>
-          <Link to="/rovers">Rovers</Link>
+        <ListSubheader
+          className={classes.sidebarSubheader}
+          sx={{ padding: '0' }}
+        >
+          <Link
+            to="/rovers"
+            className={classes.subHeaders}
+            onClick={() => setMobileOpen(false)}
+          >
+            <ListItem button>Rovers</ListItem>
+          </Link>
         </ListSubheader>
         {rovers.map(({ name, value }) => (
           <Link
@@ -59,9 +68,13 @@ const Sidebar = ({ setMobileOpen }) => {
             to={`/rovers/${value}`}
             onClick={() => setMobileOpen(false)}
           >
-            <ListItem>
+            <ListItem button>
               <ListItemIcon>
-                <ElectricCarIcon className={classes.sidebarIcon} />
+                <img
+                  src={roverIcon}
+                  alt="Icon of a rover"
+                  className={classes.sidebarIcon}
+                ></img>
               </ListItemIcon>
               <ListItemText primary={name} />
             </ListItem>
@@ -71,7 +84,7 @@ const Sidebar = ({ setMobileOpen }) => {
       <Divider />
       <List className={classes.sidebarCategories}>
         <ListSubheader className={classes.sidebarSubheader}>
-          Planets
+          <div className={classes.subHeaders}>Planets</div>
         </ListSubheader>
         {planets.map(({ name, value }) => (
           <Link
@@ -82,12 +95,22 @@ const Sidebar = ({ setMobileOpen }) => {
           >
             <ListItem button>
               <ListItemIcon>
-                <PublicIcon className={classes.sidebarIcon} />
+                <img
+                  src={planetImages[name.toLowerCase()]}
+                  alt={name}
+                  className={classes.sidebarIcon}
+                ></img>
               </ListItemIcon>
               <ListItemText primary={name} />
             </ListItem>
           </Link>
         ))}
+      </List>
+      <Divider />
+      <List className={classes.sidebarCategories}>
+        <Link to="/attribution" className={classes.links}>
+          <ListItem button>Attribution</ListItem>
+        </Link>
       </List>
     </div>
   );

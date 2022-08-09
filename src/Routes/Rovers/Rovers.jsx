@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Typography, Grid, Modal, Grow } from '@mui/material';
-import { useGetImagesQuery, useGetRoversQuery } from '../../services/NASA';
+import { useGetRoversQuery } from '../../services/NASA';
 import { LoadingSpinner } from '../../components/index';
 import roverImages from '../../assets/images';
 
@@ -11,7 +11,6 @@ const Rovers = () => {
   const classes = useStyles();
 
   const { data, isFetching, error } = useGetRoversQuery();
-  console.log(data);
   return (
     <Grid container className={classes.roversContainer}>
       {isFetching ? (
