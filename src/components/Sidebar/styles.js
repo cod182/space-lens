@@ -11,6 +11,12 @@ export default makeStyles((theme) => ({
       width: '100vw',
     },
   },
+  closeIcon: {
+    width: 'fit-content',
+    position: 'absolute !important',
+    left: '10px',
+    top: '10px',
+  },
   logoContainer: {
     margin: 'auto',
   },

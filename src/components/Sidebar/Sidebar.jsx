@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Divider,
   List,
@@ -6,9 +7,8 @@ import {
   ListItemText,
   ListSubheader,
   ListItemIcon,
-  Typography,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import CloseIcon from '@mui/icons-material/Close';
 
 import roverIcon from '../../assets/images/rover.png';
 
@@ -40,6 +40,9 @@ const Sidebar = ({ setMobileOpen }) => {
 
   return (
     <div className={classes.sidebarContainer}>
+      <a className={classes.closeIcon} onClick={() => setMobileOpen(false)}>
+        <CloseIcon />
+      </a>
       <Link
         to="/"
         className={classes.logoContainer}
