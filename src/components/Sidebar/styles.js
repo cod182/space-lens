@@ -35,7 +35,7 @@ export default makeStyles((theme) => ({
     }
   },
   sidebarSubheader: {
-    backgroundColor: 'inherit !important',
+    backgroundColor: '#e2e2e2 !important',
   },
   sidebarIcon: {
     color: 'black',
