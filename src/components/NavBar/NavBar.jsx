@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   AppBar,
   IconButton,
@@ -6,12 +7,10 @@ import {
   Drawer,
   useMediaQuery,
 } from '@mui/material';
-
 import { Menu } from '@mui/icons-material';
-
-import { Sidebar } from '../index';
-
 import useStyles from './styles';
+import { Sidebar } from '../index';
+import logo from '../../assets/images/logo.png';
 
 const NavBar = () => {
   const classes = useStyles();
@@ -32,6 +31,9 @@ const NavBar = () => {
             >
               <Menu />
             </IconButton>
+            <Link to="/">
+              <img className={classes.logo} src={logo} alt="Space Lens Logo" />
+            </Link>
           </Toolbar>
         </AppBar>
       ) : (

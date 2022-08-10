@@ -39,8 +39,11 @@ const Rover = () => {
 
   const { rover } = useParams();
   const [earthDate, setEarthDate] = useState('1979-01-01');
+  if (earthDate === undefined) {
+    setEarthDate('1979-01-01');
+  }
 
-  const { data: roverInfo, isFetching: roverInfoFetching } = useGetRoverQuery({
+  const { data: roverInfo } = useGetRoverQuery({
     rover,
   });
 
@@ -115,83 +118,68 @@ const Rover = () => {
             </Grid>
 
             {/* Available unique cameras */}
-            {isFetching ? (
-              <Grid item md={12}>
-                <LoadingSpinner />
-              </Grid>
-            ) : (
-              data?.photos.map(({ img_src, camera, id }) =>
-                // if a camera is already in the camerasPresent array, it is skipped
-                camerasPresent.includes(camera?.name) ? null : (
-                  <Grid
-                    item
-                    md={3}
-                    key={camera?.name}
-                    sx={{ marginTop: '10px', padding: '5px' }}
-                  >
-                    <ImageContainer
-                      imgSrc={img_src}
-                      imgTitle={camera?.full_name}
-                      title={camera?.full_name}
-                      i={id}
-                    />
-                    {/* Pushes the camera into the camerasPresent array */}
-                    {camerasPresent.push(camera?.name)}
-                  </Grid>
-                )
+
+            {data?.photos.map(({ img_src, camera, id }) =>
+              camerasPresent.includes(camera?.name) ? null : (
+                <Grid
+                  item
+                  md={3}
+                  key={camera?.name}
+                  sx={{ marginTop: '10px', padding: '5px' }}
+                >
+                  <ImageContainer
+                    imgSrc={img_src}
+                    imgTitle={camera?.full_name}
+                    title={camera?.full_name}
+                    i={id}
+                  />
+                  {/* Pushes the camera into the camerasPresent array */}
+                  {camerasPresent.push(camera?.name)}
+                </Grid>
               )
             )}
           </Grid>
           <Grid item md={4} className={classes.infoGrid}>
             <Grid item md={12} className={classes.FlexRowCenter}>
-              {roverInfoFetching ? (
-                <Box sx={{ margin: 'auto' }}>
-                  <LoadingSpinner />
-                </Box>
-              ) : (
-                <Box className={classes.infoContainer}>
-                  <Typography className={classes.title} variant="h5">
-                    {roverInfo?.rover?.name}
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Mission Status:{' '}
-                    <span
-                      className={
-                        roverInfo?.rover?.status === 'active'
-                          ? classes.green
-                          : classes.red
-                      }
-                    >
-                      {roverInfo?.rover?.status.slice(0, 1).toUpperCase()}
-                      {roverInfo?.rover?.status.slice(1)}
-                    </span>
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Launch Date:{' '}
-                    {roverInfo?.rover?.launch_date
-                      .split('-')
-                      .reverse()
-                      .join('/')}
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Mission Start:{' '}
-                    {roverInfo?.rover?.landing_date
-                      .split('-')
-                      .reverse()
-                      .join('/')}
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Mission End:{' '}
-                    {roverInfo?.rover?.max_date.split('-').reverse().join('/')}
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Number of Cameras: {roverInfo?.rover?.cameras.length}
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Pictures taken: {roverInfo?.rover?.total_photos}
-                  </Typography>
-                </Box>
-              )}
+              <Box className={classes.infoContainer}>
+                <Typography className={classes.title} variant="h5">
+                  {roverInfo?.rover?.name}
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Mission Status:{' '}
+                  <span
+                    className={
+                      roverInfo?.rover?.status === 'active'
+                        ? classes.green
+                        : classes.red
+                    }
+                  >
+                    {roverInfo?.rover?.status.slice(0, 1).toUpperCase()}
+                    {roverInfo?.rover?.status.slice(1)}
+                  </span>
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Launch Date:{' '}
+                  {roverInfo?.rover?.launch_date.split('-').reverse().join('/')}
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Mission Start:{' '}
+                  {roverInfo?.rover?.landing_date
+                    .split('-')
+                    .reverse()
+                    .join('/')}
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Mission End:{' '}
+                  {roverInfo?.rover?.max_date.split('-').reverse().join('/')}
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Number of Cameras: {roverInfo?.rover?.cameras.length}
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Pictures taken: {roverInfo?.rover?.total_photos}
+                </Typography>
+              </Box>
             </Grid>
             <Grid
               item

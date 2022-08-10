@@ -13,5 +13,8 @@ export default makeStyles(() => ({
   },
   greyBackground: {
     backgroundColor: '#e2e2e2 !important',
+  },
+  logo: {
+    maxHeight: '70px'
   }
 }));

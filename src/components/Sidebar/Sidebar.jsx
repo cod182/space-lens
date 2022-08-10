@@ -7,6 +7,8 @@ import {
   ListItemText,
   ListSubheader,
   ListItemIcon,
+  useMediaQuery,
+  IconButton,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -17,10 +19,10 @@ import logo from '../../assets/images/logo.png';
 import planetImages from '../../assets/images';
 
 const rovers = [
+  { name: 'Perseverance', value: 'perseverance' },
   { name: 'Curiosity', value: 'curiosity' },
   { name: 'Opportunity', value: 'opportunity' },
   { name: 'Spirit', value: 'spirit' },
-  { name: 'Perseverance', value: 'perseverance' },
 ];
 
 const planets = [
@@ -37,12 +39,21 @@ const planets = [
 
 const Sidebar = ({ setMobileOpen }) => {
   let classes = useStyles();
+  const isMobile = useMediaQuery('(max-width:600px)');
 
   return (
     <div className={classes.sidebarContainer}>
-      <a className={classes.closeIcon} onClick={() => setMobileOpen(false)}>
-        <CloseIcon />
-      </a>
+      {isMobile ? (
+        <IconButton
+          className={classes.closeIcon}
+          color="inherit"
+          edge="start"
+          style={{ outline: 'none' }}
+          onClick={() => setMobileOpen(false)}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
       <Link
         to="/"
         className={classes.logoContainer}
