@@ -43,11 +43,11 @@ const Rover = () => {
     setEarthDate('1979-01-01');
   }
 
-  const { data: roverInfo } = useGetRoverQuery({
+  const { data: roverInfo, isFetching } = useGetRoverQuery({
     rover,
   });
 
-  const { data, isFetching } = useGetImagesQuery({
+  const { data, isFetching: fetchingImages } = useGetImagesQuery({
     rover,
     earthDate,
   });
@@ -117,28 +117,32 @@ const Rover = () => {
               )}
             </Grid>
 
-            {/* Available unique cameras */}
-
-            {data?.photos.map(({ img_src, camera, id }) =>
-              camerasPresent.includes(camera?.name) ? null : (
-                <Grid
-                  item
-                  md={3}
-                  key={camera?.name}
-                  sx={{ marginTop: '10px', padding: '5px' }}
-                >
-                  <ImageContainer
-                    imgSrc={img_src}
-                    imgTitle={camera?.full_name}
-                    title={camera?.full_name}
-                    i={id}
-                  />
-                  {/* Pushes the camera into the camerasPresent array */}
-                  {camerasPresent.push(camera?.name)}
-                </Grid>
+            {/* Available Unique Cameras */}
+            {fetchingImages ? (
+              <LoadingSpinner />
+            ) : (
+              data?.photos.map(({ img_src, camera, id }) =>
+                camerasPresent.includes(camera?.name) ? null : (
+                  <Grid
+                    item
+                    md={3}
+                    key={camera?.name}
+                    sx={{ marginTop: '10px', padding: '5px' }}
+                  >
+                    <ImageContainer
+                      imgSrc={img_src}
+                      imgTitle={camera?.full_name}
+                      title={camera?.full_name}
+                      i={id}
+                    />
+                    {/* Pushes the camera into the camerasPresent array */}
+                    {camerasPresent.push(camera?.name)}
+                  </Grid>
+                )
               )
             )}
           </Grid>
+
           <Grid item md={4} className={classes.infoGrid}>
             <Grid item md={12} className={classes.FlexRowCenter}>
               <Box className={classes.infoContainer}>
