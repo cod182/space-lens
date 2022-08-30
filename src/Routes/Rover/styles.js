@@ -40,7 +40,7 @@ export default makeStyles((theme) => ({
     borderRadius: '10px',
     padding: '20px',
     textAlign: 'center',
-    width: 'fit-content',
+    width: '100%',
   },
   FlexRowCenter: {
     display: 'flex',

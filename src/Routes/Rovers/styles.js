@@ -76,5 +76,8 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
     backgroundColor: '#ffffff7d',
     borderRadius: '50%',
+  },
+  links: {
+    textDecoration: 'none',
   }
 }));
