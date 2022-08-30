@@ -40,7 +40,7 @@ export default makeStyles((theme) => ({
     borderRadius: '10px',
     padding: '20px',
     textAlign: 'center',
-    width: 'fit-content',
+    width: '100%',
   },
   FlexRowCenter: {
     display: 'flex',
@@ -58,8 +58,8 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
   },
-  green: { color: 'green' },
-  red: { color: 'red' },
+  green: { color: '#21ff21', fontWeight: 'bold' },
+  red: { color: 'red', fontWeight: 'bold' },
   dateInput: {
     height: '50px',
     width: '200px',

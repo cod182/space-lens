@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, Grid, Modal } from '@mui/material';
+import { Box, Typography, Grid, Modal, Button } from '@mui/material';
 
 import useStyles from './styles';
 
@@ -8,38 +8,56 @@ import { LoadingSpinner, ImageContainer } from '../../components/index';
 import { useGetImagesQuery, useGetRoverQuery } from '../../services/NASA';
 import roverImages from '../../assets/images';
 
+function incrementDate(earthDate) {
+  const date = new Date(earthDate);
+  const mili = date.setDate(date.getDate() + 1);
+  const dateObject = new Date(mili);
+  const humanDateFormat = dateObject
+    .toLocaleString()
+    .slice(0, 10)
+    .split('/')
+    .reverse()
+    .join('-');
+  return humanDateFormat;
+}
+
+function decrementDate(earthDate) {
+  const date = new Date(earthDate);
+  const mili = date.setDate(date.getDate() - 1);
+  const dateObject = new Date(mili);
+  const humanDateFormat = dateObject
+    .toLocaleString()
+    .slice(0, 10)
+    .split('/')
+    .reverse()
+    .join('-');
+  return humanDateFormat;
+}
+
 const Rover = () => {
+  const classes = useStyles();
+
   const { rover } = useParams();
   const [earthDate, setEarthDate] = useState('1979-01-01');
+  if (earthDate === undefined) {
+    setEarthDate('1979-01-01');
+  }
 
-  const classes = useStyles();
-  const { data: roverInfo, isFetching: roverInfoFetching } = useGetRoverQuery({
+  const { data: roverInfo, isFetching } = useGetRoverQuery({
     rover,
   });
-  const { data, isFetching } = useGetImagesQuery({
+
+  const { data, isFetching: fetchingImages } = useGetImagesQuery({
     rover,
     earthDate,
   });
 
-  console.log(data);
+  useEffect(() => {
+    setEarthDate(roverInfo?.rover?.landing_date);
+  }, [roverInfo]);
 
   // Array to hold unique cameras
   let camerasPresent = [];
-
-  useEffect(() => {
-    if (rover === 'curiosity') {
-      setEarthDate('2012-08-06');
-    }
-    if (rover === 'opportunity') {
-      setEarthDate('2004-01-26');
-    }
-    if (rover === 'spirit') {
-      setEarthDate('2004-01-05');
-    }
-    if (rover === 'perseverance') {
-      setEarthDate('2021-02-18');
-    }
-  }, [rover]);
 
   return (
     <>
@@ -82,27 +100,28 @@ const Rover = () => {
                     <Typography variant="h6" sx={{ color: 'white' }}>
                       Try another date
                     </Typography>
-                    <input
-                      type="date"
-                      value={earthDate}
-                      onChange={(e) => setEarthDate(e.target.value)}
-                      min={data?.photos[0]?.rover?.landing_date}
-                      max={new Date().toISOString().slice(0, 10)}
-                      className={classes.dateInput}
-                    />
+                    {roverInfo?.rover?.landing_date === earthDate ? (
+                      setEarthDate(incrementDate(earthDate))
+                    ) : (
+                      <input
+                        type="date"
+                        value={earthDate}
+                        onChange={(e) => setEarthDate(e.target.value)}
+                        min={data?.photos[0]?.rover?.landing_date}
+                        max={new Date().toISOString().slice(0, 10)}
+                        className={classes.dateInput}
+                      />
+                    )}
                   </Box>
                 </>
               )}
             </Grid>
 
-            {/* Available unique cameras */}
-            {isFetching ? (
-              <Grid item md={12}>
-                <LoadingSpinner />
-              </Grid>
+            {/* Available Unique Cameras */}
+            {fetchingImages ? (
+              <LoadingSpinner />
             ) : (
-              data?.photos.map(({ img_src, camera }) =>
-                // if a camera is already in the camerasPresent array, it is skipped
+              data?.photos.map(({ img_src, camera, id }) =>
                 camerasPresent.includes(camera?.name) ? null : (
                   <Grid
                     item
@@ -114,6 +133,7 @@ const Rover = () => {
                       imgSrc={img_src}
                       imgTitle={camera?.full_name}
                       title={camera?.full_name}
+                      i={id}
                     />
                     {/* Pushes the camera into the camerasPresent array */}
                     {camerasPresent.push(camera?.name)}
@@ -122,55 +142,48 @@ const Rover = () => {
               )
             )}
           </Grid>
+
           <Grid item md={4} className={classes.infoGrid}>
             <Grid item md={12} className={classes.FlexRowCenter}>
-              {roverInfoFetching ? (
-                <Box sx={{ margin: 'auto' }}>
-                  <LoadingSpinner />
-                </Box>
-              ) : (
-                <Box className={classes.infoContainer}>
-                  <Typography className={classes.title} variant="h5">
-                    {roverInfo?.rover?.name}
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Status:{' '}
-                    <span
-                      className={
-                        roverInfo?.rover?.status === 'active'
-                          ? classes.green
-                          : classes.red
-                      }
-                    >
-                      {roverInfo?.rover?.status}
-                    </span>
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Launch Date:{' '}
-                    {roverInfo?.rover?.launch_date
-                      .split('-')
-                      .reverse()
-                      .join('/')}
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Mission Start:{' '}
-                    {roverInfo?.rover?.landing_date
-                      .split('-')
-                      .reverse()
-                      .join('/')}
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Mission End:{' '}
-                    {roverInfo?.rover?.max_date.split('-').reverse().join('/')}
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Number of Cameras: {roverInfo?.rover?.cameras.length}
-                  </Typography>
-                  <Typography className={classes.title} variant="body1">
-                    Pictures taken: {roverInfo?.rover?.total_photos}
-                  </Typography>
-                </Box>
-              )}
+              <Box className={classes.infoContainer}>
+                <Typography className={classes.title} variant="h5">
+                  {roverInfo?.rover?.name}
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Mission Status:{' '}
+                  <span
+                    className={
+                      roverInfo?.rover?.status === 'active'
+                        ? classes.green
+                        : classes.red
+                    }
+                  >
+                    {roverInfo?.rover?.status.slice(0, 1).toUpperCase()}
+                    {roverInfo?.rover?.status.slice(1)}
+                  </span>
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Launch Date:{' '}
+                  {roverInfo?.rover?.launch_date.split('-').reverse().join('/')}
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Mission Start:{' '}
+                  {roverInfo?.rover?.landing_date
+                    .split('-')
+                    .reverse()
+                    .join('/')}
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Mission End:{' '}
+                  {roverInfo?.rover?.max_date.split('-').reverse().join('/')}
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Number of Cameras: {roverInfo?.rover?.cameras.length}
+                </Typography>
+                <Typography className={classes.title} variant="body1">
+                  Pictures taken: {roverInfo?.rover?.total_photos}
+                </Typography>
+              </Box>
             </Grid>
             <Grid
               item
@@ -178,9 +191,16 @@ const Rover = () => {
               className={classes.FlexRowCenter}
               sx={{ marginTop: '10px' }}
             >
-              <Box>
+              <Box
+                sx={{
+                  maxHeight: '300px',
+                  overflow: 'hidden',
+                  borderRadius: '10px',
+                }}
+              >
                 <ImageContainer
                   imgSrc={roverImages[roverInfo?.rover?.name.toLowerCase()]}
+                  i={roverInfo?.rover?.id}
                 />
               </Box>
             </Grid>
@@ -188,14 +208,34 @@ const Rover = () => {
               {isFetching ? (
                 <LoadingSpinner />
               ) : (
-                <input
-                  type="date"
-                  value={earthDate}
-                  onChange={(e) => setEarthDate(e.target.value)}
-                  min={data?.photos[0]?.rover?.landing_date}
-                  max={new Date().toISOString().slice(0, 10)}
-                  className={classes.dateInput}
-                />
+                <>
+                  <input
+                    type="date"
+                    value={earthDate}
+                    onChange={(e) => setEarthDate(e.target.value)}
+                    min={data?.photos[0]?.rover?.landing_date}
+                    max={new Date().toISOString().slice(0, 10)}
+                    className={classes.dateInput}
+                  />
+                  <Box>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      sx={{ margin: 'auto 5px' }}
+                      onClick={() => setEarthDate(decrementDate(earthDate))}
+                    >
+                      Prev Day
+                    </Button>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      sx={{ margin: 'auto 5px' }}
+                      onClick={() => setEarthDate(incrementDate(earthDate))}
+                    >
+                      Next Day
+                    </Button>
+                  </Box>
+                </>
               )}
             </Grid>
           </Grid>

@@ -11,6 +11,12 @@ export default makeStyles((theme) => ({
       width: '100vw',
     },
   },
+  closeIcon: {
+    width: 'fit-content',
+    position: 'absolute !important',
+    left: '10px',
+    top: '10px',
+  },
   logoContainer: {
     margin: 'auto',
   },
@@ -18,12 +24,10 @@ export default makeStyles((theme) => ({
     width: 'fit-content',
     height: '200px',
   },
-  searchBarContainer: {
-    margin: '20px 0',
-    display: 'flex',
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
+  subHeaders: {
+    fontWeight: 'bold',
+    fontSize: 'x-large',
+    color: 'black !important',
   },
   sidebarCategories: {
     alignItems: 'start',
@@ -37,12 +41,12 @@ export default makeStyles((theme) => ({
     }
   },
   sidebarSubheader: {
-    backgroundColor: 'inherit !important',
+    backgroundColor: '#e2e2e2 !important',
   },
   sidebarIcon: {
     color: 'black',
     backgroundColor: 'inherit!important',
-
+    maxWidth: '50px',
   }
 }
 

@@ -23,8 +23,8 @@ export default makeStyles((theme) => ({
     margin: '20px 0 !important',
     backgroundColor: 'black',
     border: '1px solid white',
-    maxHeight: '300px !importnat',
-    maxWidth: '300px !important',
+    maxHeight: '400px !importnat',
+    maxWidth: '400px !important',
     borderRadius: '10px',
     overflow: 'hidden',
     position: 'relative',
@@ -39,23 +39,26 @@ export default makeStyles((theme) => ({
       },
     },
   },
-
   roverInfoContainer: {
     position: 'absolute',
     backgroundColor: '#ffffff8c',
     width: '100%',
-    height: '88%',
+    height: '94%',
     transform: 'translateY(110%)',
     transition: 'all 300ms ease-in-out',
   },
 
-  roverInfoInnerContainer: {
+  statsContainer: {
     padding: '15px 15px',
+    textTransform: 'capitalize',
   },
+  green: { color: '#21ff21' },
+  red: { color: 'red' },
 
   roverImage: {
-    maxWidth: '100%',
-    objectFit: 'cover',
+    width: '100%',
+    height: '100%',
+    objectFit: 'fill',
     display: 'flex'
   },
   loadingModal: {
@@ -74,5 +77,8 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
     backgroundColor: '#ffffff7d',
     borderRadius: '50%',
+  },
+  links: {
+    textDecoration: 'none',
   }
 }));

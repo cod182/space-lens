@@ -1,6 +1,17 @@
 import { makeStyles } from '@mui/styles';
 
 export default makeStyles((theme) => ({
+
+  imageContainer: {
+    overflow: 'hidden',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    borderRadius: '10px',
+  },
   image: {
     width: '100%',
     objectFit: 'cover',
@@ -21,6 +32,6 @@ export default makeStyles((theme) => ({
     color: 'white',
     textAlign: 'center',
     minHeight: '50px',
-  }
+  },
 }
 ));
