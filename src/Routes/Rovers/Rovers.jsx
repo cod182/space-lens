@@ -82,7 +82,7 @@ const Rovers = () => {
                       </Box>
                     )}
                   </Box>
-                  <Box sx={{ maxWidth: '100%', maxHeight: '100%' }}>
+                  <Box sx={{ width: '300px', height: '300px' }}>
                     <img
                       src={roverImages[name.toLowerCase()]}
                       alt={`${name}`}

@@ -191,7 +191,13 @@ const Rover = () => {
               className={classes.FlexRowCenter}
               sx={{ marginTop: '10px' }}
             >
-              <Box>
+              <Box
+                sx={{
+                  maxHeight: '300px',
+                  overflow: 'hidden',
+                  borderRadius: '10px',
+                }}
+              >
                 <ImageContainer
                   imgSrc={roverImages[roverInfo?.rover?.name.toLowerCase()]}
                   i={roverInfo?.rover?.id}
