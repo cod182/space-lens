@@ -22,7 +22,7 @@ const Pagination = ({ currentPage, totalPages, setPage }) => {
 
   return (
     <div className={classes.container}>
-      {currentPage != 1 ? (
+      {currentPage !== 1 ? (
         <Button
           onClick={handlePrev}
           className={classes.button}
@@ -36,7 +36,7 @@ const Pagination = ({ currentPage, totalPages, setPage }) => {
       <Typography variant="h4" className={classes.pageNumber}>
         {currentPage}
       </Typography>
-      {currentPage != totalPages ? (
+      {currentPage !== totalPages ? (
         <Button
           onClick={handleNext}
           className={classes.button}

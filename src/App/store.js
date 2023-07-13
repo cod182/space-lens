@@ -10,6 +10,7 @@ export default configureStore({
     [nasaApi.reducerPath]: nasaApi.reducer,
     currentAvailableCameras: availableCamerasReducer,
     [imagesNasaApi.reducerPath]: imagesNasaApi.reducer,
-
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([nasaApi.middleware, imagesNasaApi.middleware]),
 });

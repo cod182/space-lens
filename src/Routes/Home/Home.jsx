@@ -2,13 +2,13 @@ import React from 'react';
 import { Typography, Box } from '@mui/material';
 
 import useStyles from './styles';
-import { useGetAPODQuery, useGetImagesQuery } from '../../services/NASA';
+import { useGetAPODQuery } from '../../services/NASA';
 import { LoadingSpinner, FeaturedImage } from '../../components/index';
 
 const Home = () => {
   let classes = useStyles();
 
-  const { data, error, isFetching } = useGetAPODQuery({});
+  const { data, isFetching } = useGetAPODQuery({});
 
   if (isFetching) {
     return (
