@@ -4,7 +4,6 @@ export default makeStyles((theme) => ({
 
   imageContainer: {
     overflow: 'hidden',
-    overflow: 'hidden',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
