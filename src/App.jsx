@@ -4,7 +4,7 @@ import { NavBar } from './components/index';
 import { Home, Rovers, Rover, Planet, Attribution } from './Routes/index';
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Stars } from '@react-three/drei';
+import { Stars } from '@react-three/drei';
 
 
 import useStyles from './styles';
