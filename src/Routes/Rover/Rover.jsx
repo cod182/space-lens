@@ -143,14 +143,19 @@ const Rover = () => {
             )}
           </Grid>
 
-          <Grid item md={4} className={classes.infoGrid}>
+          <Grid
+            item
+            md={4}
+            className={classes.infoGrid}
+            style={{ width: '-webkit-fill-available' }}
+          >
             <Grid item md={12} className={classes.FlexRowCenter}>
               <Box className={classes.infoContainer}>
                 <Typography className={classes.title} variant="h5">
                   {roverInfo?.rover?.name}
                 </Typography>
                 <Typography className={classes.title} variant="body1">
-                  Mission Status:{' '}
+                  Mission Status:&nbsp;
                   <span
                     className={
                       roverInfo?.rover?.status === 'active'
@@ -193,14 +198,19 @@ const Rover = () => {
             >
               <Box
                 sx={{
-                  maxHeight: '300px',
                   overflow: 'hidden',
                   borderRadius: '10px',
                 }}
               >
-                <ImageContainer
-                  imgSrc={roverImages[roverInfo?.rover?.name.toLowerCase()]}
-                  i={roverInfo?.rover?.id}
+                <img
+                  src={roverImages[roverInfo?.rover?.name.toLowerCase()]}
+                  alt="Rover"
+                  style={{
+                    maxHeight: '300px',
+                    height: 'auto',
+                    width: '-webkit-fill-available',
+                    aspect: 'scale',
+                  }}
                 />
               </Box>
             </Grid>
