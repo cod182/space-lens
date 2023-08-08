@@ -12,45 +12,16 @@ const Home = () => {
 
   const { data, isFetching } = useGetAPODQuery({});
 
-  const [dataFetching, setDataFetching] = useState(true);
-  const [signalLoss, setSignalLoss] = useState(false);
-
-  useEffect(() => {
-    const setSignalLost = () => {
-      setDataFetching(false);
-      setSignalLoss(true);
-    };
-    setTimeout(() => {
-      setSignalLost();
-    }, 10000);
-  }, []);
-
-  if (dataFetching) {
-    return (
-      <div className={classes.homeContainer}>
-        <Typography align="center" variant="h2">
-          NASA's Image of the day!
-        </Typography>
-        <LoadingSpinner />
-      </div>
-    );
-  }
-
-  return signalLoss ? (
+  return isFetching ? (
     <div className={classes.homeContainer}>
       <Box className={classes.homeInfoContainer}>
-        <Typography variant="h3">Error: Signal Lost!</Typography>
-        <img
-          src={connectionIssues}
-          alt="Connection Issues"
-          style={{ maxWidth: '100%', height: '200px' }}
-        />
-        <Typography variant="body2">
-          Apologies, the NASA Api is experiencing connectivity issues.
+        <Typography color="white" align="center" variant="h2">
+          Loading NASA's Image of the day...
         </Typography>
       </Box>
+      <LoadingSpinner />
     </div>
-  ) : (
+  ) : data.url ? (
     <div className={classes.homeContainer}>
       <FeaturedImage
         imgSrc={data.thumbnail_url ? data?.thumbnail_url : data?.url}
@@ -62,7 +33,28 @@ const Home = () => {
         <Typography variant="body1">{data?.explanation}</Typography>
       </Box>
     </div>
+  ) : (
+    <div className={classes.homeContainer}>
+      <Box className={classes.homeInfoContainer}>
+        <Typography color="white" align="center" variant="h4">
+          Error connecting to the NASA Api!
+        </Typography>
+        <img
+          src={connectionIssues}
+          alt="Connection Issues"
+          style={{ maxWidth: '100%', height: '200px' }}
+        />
+        <Typography
+          color="white"
+          align="center"
+          variant="body1"
+          style={{ marginTop: '10px' }}
+        >
+          Apologies, the NASA Api appears to be having issues. Please try
+          refreshing the page or trying again later.
+        </Typography>
+      </Box>
+    </div>
   );
 };
-
 export default Home;
