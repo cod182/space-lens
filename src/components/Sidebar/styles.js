@@ -22,6 +22,7 @@ export default makeStyles((theme) => ({
     maxHeight: '200px',
     maxWidth: 'fit-content',
     width: 'fit-content',
+    marginTop: '10px',
     [theme.breakpoints.down('sm')]: {
       marginTop: '30px'
     },
@@ -47,7 +48,7 @@ export default makeStyles((theme) => ({
     }
   },
   sidebarSubheader: {
-    backgroundColor: '#e2e2e2 !important',
+    background: 'transparent !important',
   },
   sidebarIcon: {
     color: 'black',
