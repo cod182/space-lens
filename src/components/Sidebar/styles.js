@@ -5,24 +5,30 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
-    width: '240px',
+    width: '220px',
     position: 'relative',
     [theme.breakpoints.down('sm')]: {
-      width: '100vw',
+      width: 'calc(100vw - 20px)',
     },
   },
   closeIcon: {
     width: 'fit-content',
     position: 'absolute !important',
-    left: '10px',
+    left: '20px',
     top: '10px',
   },
   logoContainer: {
     margin: 'auto',
+    maxHeight: '200px',
+    maxWidth: 'fit-content',
+    width: 'fit-content',
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '30px'
+    },
   },
   logo: {
-    width: 'fit-content',
-    height: '200px',
+    width: '100%',
+    height: '100%',
   },
   subHeaders: {
     fontWeight: 'bold',

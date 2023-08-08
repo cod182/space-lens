@@ -48,7 +48,11 @@ const Sidebar = ({ setMobileOpen }) => {
           className={classes.closeIcon}
           color="inherit"
           edge="start"
-          style={{ outline: 'none' }}
+          style={{
+            outline: 'none',
+            backgroundColor: 'rgb(255 255 255 / 40%)',
+            borderRadius: '50%',
+          }}
           onClick={() => setMobileOpen(false)}
         >
           <CloseIcon />

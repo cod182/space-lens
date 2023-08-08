@@ -12,7 +12,10 @@ export default makeStyles(() => ({
     flexDirection: 'row',
   },
   greyBackground: {
-    backgroundColor: '#e2e2e2 !important',
+    backgroundColor: '#e2e2e28a !important',
+    borderRadius: '30px !important',
+    margin: '10px !important',
+    height: '-webkit-fill-available !important'
   },
   logo: {
     maxHeight: '70px'
